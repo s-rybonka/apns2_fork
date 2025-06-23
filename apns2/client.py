@@ -133,7 +133,8 @@ class APNsClient(object):
         url = f'https://{self._server}:{self._port}/3/device/{token_hex}'
         response = self._connection.post(url, content=json_payload, headers=headers)
         # Use hash of response object as stream ID
-        return hash(response)
+        hash_response = hash(response)
+        return response
 
     def get_notification_result(self, stream_id: int) -> Union[str, Tuple[str, str]]:
         """
